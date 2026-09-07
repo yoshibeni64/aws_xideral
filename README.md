@@ -166,9 +166,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 ## 9. Instalación de Docker
 
-Instalamos **Docker Engine** en nuestra instancia EC2 siguiendo la documentación oficial de Docker para Ubuntu:
-
-[Documentación oficial de Docker](https://docs.docker.com/engine/install/ubuntu/)
+Instalamos **Docker Engine** en nuestra instancia EC2 siguiendo la documentación oficial de Docker para Ubuntu.
 
 Docker nos permitirá posteriormente crear y ejecutar **contenedores** dentro de nuestra instancia.
 
@@ -246,9 +244,67 @@ pyenv --version
 
 Si el comando devuelve la versión instalada de `pyenv`, significa que la configuración se realizó correctamente.
 
-## 14. Instalación de Jupyter Notebook
+---
 
-Instalamos **Jupyter Notebook** y `ipykernel`, que permite ejecutar código Python dentro de los notebooks:
+## 13. Instalación y configuración de Python 3.14.7
+
+Utilizamos `pyenv` para instalar la versión **Python 3.14.7**:
+
+```bash
+pyenv install 3.14.7
+```
+
+Una vez instalada, configuramos esta versión como la versión global de Python:
+
+```bash
+pyenv global 3.14.7
+```
+
+Comprobamos que la versión configurada sea la correcta:
+
+```bash
+python --version
+```
+
+El resultado esperado es:
+
+```text
+Python 3.14.7
+```
+
+De esta manera, Python 3.14.7 queda configurado como la versión global de Python para nuestro usuario.
+
+---
+
+## 14. Creación de un entorno virtual de Python
+
+Creamos un entorno virtual utilizando el módulo `venv` de Python:
+
+```bash
+python -m venv .venv
+```
+
+El entorno virtual se crea dentro de la carpeta `.venv`, permitiendo mantener las dependencias de este proyecto aisladas del resto del sistema.
+
+Posteriormente activamos el entorno virtual:
+
+```bash
+source .venv/bin/activate
+```
+
+Al activarlo, la terminal muestra el nombre del entorno al inicio de la línea de comandos:
+
+```text
+(.venv) usuario@ubuntu:~/jupyter$
+```
+
+Esto indica que actualmente estamos trabajando dentro del entorno virtual `.venv`.
+
+---
+
+## 15. Instalación de Jupyter Notebook
+
+Con el entorno virtual `.venv` activado, instalamos **Jupyter Notebook** y `ipykernel`:
 
 ```bash
 pip install notebook
@@ -258,17 +314,34 @@ pip install notebook
 pip install ipykernel
 ```
 
+Al realizar la instalación con el entorno virtual activo, estas dependencias se instalan dentro de `.venv`, manteniéndolas aisladas del Python global.
+
 ---
 
-## 15. Ejecución de Jupyter Notebook
+## 16. Ejecución de Jupyter Notebook
 
-Iniciamos Jupyter Notebook con:
+Con el entorno virtual `.venv` activado, iniciamos Jupyter Notebook:
 
 ```bash
 jupyter notebook
 ```
 
-Esto inicia el servidor de Jupyter y proporciona una **URL para acceder a la interfaz de Jupyter Notebook desde el navegador**.
+Esto inicia el servidor de **Jupyter Notebook** utilizando el entorno virtual y proporciona una URL para acceder a la interfaz desde el navegador.
 
 Desde esta interfaz podemos crear y ejecutar archivos `.ipynb` para trabajar con Python de manera interactiva.
 
+El flujo utilizado fue:
+
+```text
+Python 3.14.7
+      ↓
+pyenv global
+      ↓
+python -m venv .venv
+      ↓
+source .venv/bin/activate
+      ↓
+pip install notebook
+      ↓
+jupyter notebook
+```
