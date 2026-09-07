@@ -1,1 +1,108 @@
-<p>Hola mundo</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi página</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .navBar {
+            display: flex;
+            width: 100%;
+        }
+
+        .navBar div {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #ddd;
+        }
+
+        .navBar div:hover {
+            background-color: red;
+            color: white;
+        }
+
+        .section {
+            display: none;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .section.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>Mi página</h1>
+    </header>
+
+    <nav class="navBar">
+        <div class="tareas" onclick="mostrarSeccion('tareas')">
+            Tareas
+        </div>
+
+        <div class="ejercicios" onclick="mostrarSeccion('ejercicios')">
+            Ejercicios
+        </div>
+
+        <div class="certificaciones" onclick="mostrarSeccion('certificaciones')">
+            Certificaciones
+        </div>
+    </nav>
+
+    <div class="section tareas">
+        <h2>Tareas</h2>
+        <p>Aquí estarán mis tareas.</p>
+    </div>
+
+    <div class="section ejercicios">
+        <h2>Ejercicios</h2>
+        <p>Aquí estarán mis ejercicios.</p>
+    </div>
+
+    <div class="section certificaciones">
+        <h2>Certificaciones</h2>
+        <p>Aquí estarán mis certificaciones.</p>
+    </div>
+
+    <script>
+        function mostrarSeccion(nombre) {
+            const secciones = document.querySelectorAll('.section');
+
+            secciones.forEach(seccion => {
+                seccion.classList.remove('active');
+            });
+
+            const seccionSeleccionada = document.querySelector(
+                '.section.' + nombre
+            );
+
+            seccionSeleccionada.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
