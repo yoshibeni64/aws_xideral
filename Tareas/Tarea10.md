@@ -1,33 +1,24 @@
-# Biblioteca - MySQL
-
-## Crear la base de datos
-
-```sql
 CREATE DATABASE biblioteca;
 
 USE biblioteca;
 
-DROP TABLE libros_nombre;
+drop table libros_Rodrigo
 
-CREATE TABLE libros_nombre (
+CREATE TABLE libros_Rodrigo (
     libro_id INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(100),
     autor VARCHAR(100),
     genero VARCHAR(40),
     anio_publicacion INT,
     numero_paginas INT,
-    calificacion DECIMAL(3,1),
+    calificacion DECIMAL (3,1),
     disponible BOOL
 );
-```
 
-## Insertar los 50 libros
-
-```sql
-INSERT INTO libros_nombre
+/*
+INSERT INTO libros_Rodrigo
 (titulo, autor, genero, anio_publicacion, numero_paginas, calificacion, disponible)
 VALUES
-
 -- Realismo mágico
 ('Cien años de soledad', 'Gabriel García Márquez', 'Realismo mágico', 1967, 417, 9.4, TRUE),
 ('El amor en los tiempos del cólera', 'Gabriel García Márquez', 'Realismo mágico', 1985, 348, 9.1, TRUE),
@@ -89,100 +80,40 @@ VALUES
 ('Perdida', 'Gillian Flynn', 'Misterio', 2012, 432, 8.9, TRUE),
 ('El silencio de los corderos', 'Thomas Harris', 'Misterio', 1988, 352, 9.1, FALSE),
 ('Diez negritos', 'Agatha Christie', 'Misterio', 1939, 272, 9.5, TRUE);
-```
+*/
 
-# Consultas
-
-## 1. Mostrar todos los libros
-
-```sql
-SELECT *
-FROM libros_nombre;
-```
-
-## 2. Mostrar solamente el título, autor y género
-
-```sql
-SELECT titulo, autor, genero
-FROM libros_nombre;
-```
-
-## 3. Mostrar los libros disponibles
-
-```sql
-SELECT *
-FROM libros_nombre
-WHERE disponible = 1;
-```
-
-## 4. Buscar los libros de un género específico
-
-```sql
-SELECT *
-FROM libros_nombre
-WHERE genero = "Romance";
-```
-
-## 5. Mostrar los libros publicados después del año 2000
-
-```sql
-SELECT *
-FROM libros_nombre
-WHERE anio_publicacion > 2000;
-```
-
-## 6. Mostrar los libros con calificación mayor a 8
-
-```sql
-SELECT *
-FROM libros_nombre
-WHERE calificacion > 8;
-```
-
-## 7. Ordenar los libros del más reciente al más antiguo
-
-```sql
-SELECT *
-FROM libros_nombre
-ORDER BY anio_publicacion DESC;
-```
-
-## 8. Mostrar el libro con mayor calificación
-
-```sql
-SELECT *
-FROM libros_nombre
-ORDER BY calificacion DESC
-LIMIT 1;
-```
-
-## 9. Calcular el promedio de páginas de los libros
-
-```sql
-SELECT AVG(numero_paginas) AS promedio_paginas
-FROM libros_nombre;
-```
-
-## 10. Contar cuántos libros existen por género
-
-```sql
-SELECT genero, COUNT(*) AS cantidad
-FROM libros_nombre
-GROUP BY genero;
-```
-
-## 11. Buscar libros cuyo título contenga una palabra utilizando LIKE
-
-```sql
-SELECT *
-FROM libros_nombre
-WHERE titulo LIKE "El%";
-```
-
-## 12. Cambiar un libro de disponible a no disponible utilizando UPDATE
-
-```sql
-UPDATE libros_nombre
-SET disponible = FALSE
-WHERE libro_id = 1;
-```
+-- 1. Mostrar todos los libros.
+select * from libros_Rodrigo 
+-- 2. Mostrar solamente el título, autor y género.
+select titulo, autor, genero from libros_Rodrigo 
+-- 3. Mostrar los libros disponibles.
+select * from libros_Rodrigo
+where disponible = 1
+-- 4. Buscar los libros de un género específico.
+select * from libros_Rodrigo
+where genero="Romance"
+-- 5. Mostrar los libros publicados después del año 2000.
+select * from libros_Rodrigo
+where anio_publicacion>2000
+-- 6. Mostrar los libros con calificación mayor a 8.
+select * from libros_Rodrigo
+where calificacion>8
+-- 7. Ordenar los libros del más reciente al más antiguo.
+select * from libros_Rodrigo
+order by anio_publicacion desc
+-- 8. Mostrar el libro con mayor calificación.
+select * from libros_Rodrigo
+order by calificacion desc
+limit 1
+-- 9. Calcular el promedio de páginas de los libros.
+select avg(numero_paginas) as promedio_paginas from libros_Rodrigo;
+-- 10. Contar cuántos libros existen por género.
+select genero, count(*) from libros_Rodrigo
+group by genero
+-- 11. Buscar libros cuyo título contenga una palabra utilizando LIKE.
+select * from libros_Rodrigo
+where titulo like "El%"
+-- 12. Cambiar un libro de disponible a no disponible utilizando UPDATE.
+update libros_Rodrigo
+set disponible = FALSE
+where libro_id = 1;
